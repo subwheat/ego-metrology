@@ -7,7 +7,7 @@ name = "ego-metrology"
 version = "0.2.0"
 description = "Heuristic Context Saturation Profiler for LLMs — EGO V12.2 Framework"
 readme = "README.md"
-license = { file = "LICENSE" }
+license = "MIT"
 requires-python = ">=3.9"
 authors = [
     { name = "Julien Tournier", email = "julien@uyuni.world" }

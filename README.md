@@ -1,12 +1,27 @@
 # EGO Metrology
 
-**Thermodynamic & Holographic Profiling for LLMs**
+**Heuristic Context Saturation Profiler for LLMs**
 
-> Stop guessing when your LLM will hallucinate. Measure its structural limits.
+> Know when your context is working against you — before you generate a single token.
 
-Modern LLMs ingest massive contexts — 50k, 100k, 200k tokens — but performance
-degrades unpredictably. EGO Metrology introduces three physics-derived metrics,
-based on the **EGO V12.2 framework**, to profile any prompt before generation.
+## What this is
+
+EGO Metrology is an **open-source heuristic profiler**. It estimates context
+saturation and structural load for LLM prompts, based on the EGO V12.2
+theoretical framework (Holographic Quantum Error Correction / Tensor Networks).
+
+## What OSS does
+
+- Measures **context pressure** η — how full your window really is
+- Estimates **spectatorization ratio** α_S — passive overhead vs active computation
+- Flags **geometric saturation** r(η) — the point where adding tokens stops helping
+- Provides an **uncalibrated** logical decay estimate τ
+
+## What OSS does not do
+
+- Does not measure model internals (logits, attention, entropy)
+- Does not predict hallucination probability
+- Does not provide calibrated τ values — empirical sectoral anchors are Enterprise only
 
 ## Install
 ```bash
@@ -25,16 +40,18 @@ print(result.summary())
 ## The Three Metrics
 
 **1. Spectatorization Ratio — α_S**
-How much of your context becomes passive overhead vs active computation.
-`α_S → 1` means the model is bearing the full structural weight of the context.
+Heuristic estimate of passive context overhead.
+`α_S → 1` means your prompt is bearing heavy structural weight.
 
 **2. Geometric Saturation — r(η)**
-Where your prompt sits on the continuum between linear attention (r=1.2071)
-and holographic saturation (r=π/2 ≈ 1.5708). Past the bound, adding tokens is futile.
+Position on the continuum between linear attention (r=1.2071)
+and holographic saturation (r=π/2 ≈ 1.5708).
+Past the bound, adding tokens yields diminishing returns.
 
-**3. Logical Decay Estimator — τ**
-Predicted number of coherent output tokens before hallucination onset.
-Requires calibrated sectoral anchors — available in EGO Enterprise.
+**3. Logical Decay Estimate — τ** *(uncalibrated in OSS)*
+A structural estimate of output coherence lifespan.
+Requires empirically validated sectoral anchors to be meaningful.
+Calibrated values are available in EGO Enterprise.
 
 ## CLI
 ```bash
@@ -51,10 +68,10 @@ Based on the **EGO V12.2 framework**, applying principles from:
 
 ## EGO Enterprise
 
-The open-core library provides the measurement framework.
-**EGO Enterprise** adds what actually makes it production-ready:
+The open-core library provides the heuristic measurement framework.
+**EGO Enterprise** adds empirical calibration and production tooling:
 
-- Empirically calibrated sectoral anchors for GPT-4, Claude, Gemini, Mistral
+- Validated sectoral anchors for GPT-4, Claude, Gemini, Mistral
 - Full bulk/boundary recoverability testing
 - Visual dashboard + historical tracking
 - CI/CD integration

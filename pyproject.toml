@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "ego-metrology"
+version = "0.1.0"
+description = "Thermodynamic & Holographic Profiling for LLMs — EGO V12.2 Framework"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+authors = [
+    { name = "Julien Tournier", email = "contact@uyuni.fr" }
+]
+keywords = ["llm", "prompt-engineering", "hallucination", "context-window", "mlops", "rag"]
+
+[project.scripts]
+ego-profile = "ego_metrology.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ego_metrology*"]

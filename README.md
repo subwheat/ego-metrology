@@ -81,3 +81,20 @@ The open-core library provides the heuristic measurement framework.
 ## License
 
 MIT — © 2026 Julien Tournier / Uyuni
+
+## API Server (v0.3)
+
+A FastAPI server is available for remote profiling.
+
+**Launch locally:**
+```bash
+pip install fastapi uvicorn
+uvicorn server:app --host 0.0.0.0 --port 8000
+```
+
+**Endpoints:**
+- `GET  /health` — liveness probe
+- `GET  /models` — list available models
+- `POST /profile` — run EGO profiling
+
+**Interactive docs:** `http://YOUR_IP:8000/docs`

@@ -21,7 +21,19 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install pytest
+        run: pip install pytest build
 
       - name: Run tests
         run: pytest tests/ -v
+
+      - name: Build package
+        run: python -m build
+
+      - name: Install built wheel
+        run: pip install dist/*.whl
+
+      - name: Smoke test CLI
+        run: ego-profile deepseek-14b 12000
+
+      - name: Smoke test import
+        run: python -c "from ego_metrology import EgoProfiler; print(EgoProfiler('mistral-7b').profile(4000).summary())"

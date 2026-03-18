@@ -63,7 +63,7 @@ class ProfileResult:
             else f"{self.tau:,} tokens"
         )
         return f"""
-  ╔═══ EGO METROLOGY v0.1.0 ═══════════════════════╗
+  ╔═══ EGO METROLOGY v0.2.1 ═══════════════════════╗
   ║  Model        : {self.model}
   ║  Tokens       : {self.prompt_tokens:>8,} / {self.max_context_tokens:,} ({self.saturation_pct}% full)
   ║  Calibration  : {self.calibration_status}

@@ -2,9 +2,11 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from typing import Literal
-
-R_1D   = (1 + math.sqrt(2)) / 2
-R_HOLO = math.pi / 2
+from .heuristics import (
+    compute_eta, compute_alpha_s, compute_r_eta,
+    compute_geometric_status, compute_c_dyn, compute_log_tau,
+    R_1D, R_HOLO
+)
 
 CalibrationStatus = Literal["heuristic", "calibrated"]
 
@@ -101,27 +103,30 @@ class EgoProfiler:
             self.config = model
 
     def _eta(self, tokens: int) -> float:
-        return min(max(tokens / self.config.max_context_tokens, 0.0), 1.0)
+        return compute_eta(tokens, self.config.max_context_tokens)
 
     def get_spectatorization_ratio(self, tokens: int) -> float:
         _validate_prompt_tokens(tokens, self.config.max_context_tokens)
-        return round(self._eta(tokens) ** 1.5, 6)
+        return compute_alpha_s(self._eta(tokens))
 
     def get_geometric_saturation(self, tokens: int) -> dict:
         _validate_prompt_tokens(tokens, self.config.max_context_tokens)
         eta   = self._eta(tokens)
-        r_eta = R_1D + (R_HOLO - R_1D) * eta
-        status = "Critical" if r_eta >= 1.55 else "Warning" if r_eta > 1.45 else "Safe"
-        return {"r_eta": round(r_eta, 6), "eta": round(eta, 6), "status": status,
-                "r_1d": R_1D, "r_holo": R_HOLO}
+        r_eta = compute_r_eta(eta)
+        return {
+            "r_eta":  r_eta,
+            "eta":    round(eta, 6),
+            "status": compute_geometric_status(r_eta),
+            "r_1d":   R_1D,
+            "r_holo": R_HOLO,
+        }
 
     def estimate_logical_decay(self, tokens: int) -> tuple[int, float]:
         _validate_prompt_tokens(tokens, self.config.max_context_tokens)
-        # Calibrated sectoral anchors available in EGO Enterprise — julien@uyuni.world
         alpha_s = self.get_spectatorization_ratio(tokens)
-        c_dyn   = (tokens * self.config.c_conf_base) * (1 + alpha_s)
-        log_tau = max(1.0, min(self.config.a_secteur - self.config.beta_secteur * c_dyn, 10.0))
-        return int(math.exp(log_tau)), round(c_dyn, 4)
+        c_dyn   = compute_c_dyn(tokens, self.config.c_conf_base, alpha_s)
+        log_tau = compute_log_tau(self.config.a_secteur, self.config.beta_secteur, c_dyn)
+        return int(math.exp(log_tau)), c_dyn
 
     def profile(self, prompt_tokens: int) -> ProfileResult:
         _validate_prompt_tokens(prompt_tokens, self.config.max_context_tokens)

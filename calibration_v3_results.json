@@ -1,0 +1,68 @@
+{
+  "model": "mistralai/Mistral-7B-Instruct-v0.2",
+  "protocol": "competitive_retrieval_v3",
+  "a_secteur": 4.6052,
+  "beta_secteur": 0.0,
+  "data": [
+    {
+      "padding_words": 100,
+      "prompt_tokens": 195,
+      "c_dyn": 58.7,
+      "success_rate": 1.0,
+      "exact": 15,
+      "decoy": 0,
+      "missed": 0,
+      "total": 15
+    },
+    {
+      "padding_words": 300,
+      "prompt_tokens": 455,
+      "c_dyn": 138.3,
+      "success_rate": 1.0,
+      "exact": 15,
+      "decoy": 0,
+      "missed": 0,
+      "total": 15
+    },
+    {
+      "padding_words": 700,
+      "prompt_tokens": 975,
+      "c_dyn": 304.5,
+      "success_rate": 1.0,
+      "exact": 15,
+      "decoy": 0,
+      "missed": 0,
+      "total": 15
+    },
+    {
+      "padding_words": 1500,
+      "prompt_tokens": 2015,
+      "c_dyn": 678.2,
+      "success_rate": 1.0,
+      "exact": 15,
+      "decoy": 0,
+      "missed": 0,
+      "total": 15
+    },
+    {
+      "padding_words": 3000,
+      "prompt_tokens": 3965,
+      "c_dyn": 1590.0,
+      "success_rate": 1.0,
+      "exact": 15,
+      "decoy": 0,
+      "missed": 0,
+      "total": 15
+    },
+    {
+      "padding_words": 5000,
+      "prompt_tokens": 6565,
+      "c_dyn": 3382.4,
+      "success_rate": 1.0,
+      "exact": 15,
+      "decoy": 0,
+      "missed": 0,
+      "total": 15
+    }
+  ]
+}

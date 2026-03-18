@@ -6,6 +6,8 @@ from typing import Literal
 R_1D   = (1 + math.sqrt(2)) / 2
 R_HOLO = math.pi / 2
 
+CalibrationStatus = Literal["heuristic", "calibrated"]
+
 @dataclass
 class ModelSectorConfig:
     name: str
@@ -13,15 +15,16 @@ class ModelSectorConfig:
     a_secteur: float
     beta_secteur: float
     c_conf_base: float = 0.3
+    calibration_status: CalibrationStatus = "heuristic"
 
-# Default configs ship with uncalibrated placeholder constants.
-# Production-validated sectoral anchors are available in EGO Enterprise.
-# Contact: julien@uyuni.world
+# Heuristic presets — context-window driven only.
+# These are NOT empirically calibrated per model.
+# Production-validated sectoral anchors: julien@uyuni.world
 SECTOR_CONFIGS: dict[str, ModelSectorConfig] = {
-    "mistral-7b":   ModelSectorConfig("Mistral-7B",    8_192,   1.0, 0.001),
-    "deepseek-14b": ModelSectorConfig("DeepSeek-14B",  16_384,  1.0, 0.001),
-    "qwen-local":   ModelSectorConfig("Qwen-Local",    32_768,  1.0, 0.001),
-    "claude-api":   ModelSectorConfig("Claude-API",    200_000, 1.0, 0.001),
+    "mistral-7b":   ModelSectorConfig("Mistral-7B",    8_192,   1.0, 0.001, calibration_status="heuristic"),
+    "deepseek-14b": ModelSectorConfig("DeepSeek-14B",  16_384,  1.0, 0.001, calibration_status="heuristic"),
+    "qwen-local":   ModelSectorConfig("Qwen-Local",    32_768,  1.0, 0.001, calibration_status="heuristic"),
+    "claude-api":   ModelSectorConfig("Claude-API",    200_000, 1.0, 0.001, calibration_status="heuristic"),
 }
 
 GeometricStatus = Literal["Safe", "Warning", "Critical"]
@@ -37,8 +40,8 @@ class ProfileResult:
     geometric_regime: GeometricStatus
     tau: int
     c_dyn: float
-    calibration_status: str = "heuristic"
-    r_1d: float  = field(default=R_1D)
+    calibration_status: CalibrationStatus = "heuristic"
+    r_1d: float   = field(default=R_1D)
     r_holo: float = field(default=R_HOLO)
 
     @property
@@ -52,20 +55,24 @@ class ProfileResult:
             "Moderate spectatorization" if self.alpha_s > 0.3 else
             "Efficient — low passive load"
         )
+        tau_line = (
+            "uncalibrated — EGO Enterprise only"
+            if self.calibration_status == "heuristic"
+            else f"{self.tau:,} tokens"
+        )
         return f"""
   ╔═══ EGO METROLOGY v0.1.0 ═══════════════════════╗
-  ║  Model  : {self.model}
-  ║  Tokens : {self.prompt_tokens:>8,} / {self.max_context_tokens:,} ({self.saturation_pct}% full)
+  ║  Model        : {self.model}
+  ║  Tokens       : {self.prompt_tokens:>8,} / {self.max_context_tokens:,} ({self.saturation_pct}% full)
+  ║  Calibration  : {self.calibration_status}
   ╠═════════════════════════════════════════════════╣
   ║  [1] α_S  : {self.alpha_s:.6f}  — {label}
   ║  [2] r(η) : {self.r_eta:.6f}  {icon} {self.geometric_regime}
-  ║  [3] τ    : uncalibrated — EGO Enterprise only
-  ║  calibration : {self.calibration_status}
+  ║  [3] τ    : {tau_line}
   ╚═════════════════════════════════════════════════╝"""
 
 
 def _validate_prompt_tokens(prompt_tokens: int, max_context_tokens: int) -> None:
-    """Valide les entrées utilisateur et lève des erreurs claires."""
     if not isinstance(prompt_tokens, int):
         raise TypeError(
             f"prompt_tokens must be an integer, got {type(prompt_tokens).__name__}."
@@ -110,8 +117,7 @@ class EgoProfiler:
 
     def estimate_logical_decay(self, tokens: int) -> tuple[int, float]:
         _validate_prompt_tokens(tokens, self.config.max_context_tokens)
-        # Sectoral constants (a_secteur, beta_secteur) required for accurate tau.
-        # Calibrated values available in EGO Enterprise — julien@uyuni.world
+        # Calibrated sectoral anchors available in EGO Enterprise — julien@uyuni.world
         alpha_s = self.get_spectatorization_ratio(tokens)
         c_dyn   = (tokens * self.config.c_conf_base) * (1 + alpha_s)
         log_tau = max(1.0, min(self.config.a_secteur - self.config.beta_secteur * c_dyn, 10.0))
@@ -132,5 +138,5 @@ class EgoProfiler:
             geometric_regime=geom["status"],
             tau=tau,
             c_dyn=c_dyn,
-            calibration_status="heuristic",
+            calibration_status=self.config.calibration_status,
         )

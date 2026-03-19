@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ego-metrology"
-version = "0.2.0"
+version = "0.2.1"
 description = "Heuristic Context Saturation Profiler for LLMs — EGO V12.2 Framework"
 readme = "README.md"
 license = "MIT"

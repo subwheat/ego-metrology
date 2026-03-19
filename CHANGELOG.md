@@ -28,7 +28,7 @@
 ### Known limits
 - Sectoral anchors (`a_secteur`, `beta_secteur`) are placeholder constants in OSS
 - `τ` requires empirical calibration to be meaningful
-- No FastAPI server yet (coming in v0.3)
+- Public API remains intentionally narrow and heuristic-only
 
 ---
 
@@ -37,5 +37,5 @@
 ### Added
 - Initial release
 - Core profiler: `α_S`, `r(η)`, `τ`
-- CLI: `ego-profile <model> <tokens>`
+- CLI: `ego-profile <model> <tokens>` (also invokable via `python -m ego_metrology`)
 - Four model presets: `mistral-7b`, `deepseek-14b`, `qwen-local`, `claude-api`

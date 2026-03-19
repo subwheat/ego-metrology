@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""Run this from ~/ego-metrology: python3 write_readme.py"""
+import subprocess, sys
+from pathlib import Path
+
+README = """\
 # EGO Metrology
 **Heuristic Context Saturation Profiler for LLMs**
 > Know when your context is working against you — before you generate a single token.
@@ -52,13 +58,6 @@ Requires empirically validated sectoral anchors to be meaningful.
 Calibrated values are not part of the public OSS package.
 
 ## CLI
-**Preferred (after `pip install ego-metrology`):**
-```bash
-ego-profile deepseek-14b 12000
-ego-profile deepseek-14b 12000 --json
-ego-profile --list
-```
-**Alternative (clone without install):**
 ```bash
 python -m ego_metrology deepseek-14b 12000
 python -m ego_metrology deepseek-14b 12000 --json
@@ -91,8 +90,8 @@ uvicorn server:app --host 0.0.0.0 --port 8000
 
 ### Example request
 ```bash
-curl -s http://127.0.0.1:8000/profile \
-  -H 'Content-Type: application/json' \
+curl -s http://127.0.0.1:8000/profile \\
+  -H 'Content-Type: application/json' \\
   -d '{"model_name":"mistral-7b","prompt_tokens":1200}'
 ```
 
@@ -103,3 +102,14 @@ and broader production tooling.
 
 ## License
 MIT — © 2026 Julien Tournier / Uyuni
+"""
+
+target = Path("README.md")
+target.write_text(README, encoding="utf-8")
+print(f"✅ README.md written ({len(README)} chars)")
+
+result = subprocess.run(
+    [sys.executable, "-m", "pytest", "-q", "-W", "error::DeprecationWarning"],
+    capture_output=False
+)
+sys.exit(result.returncode)

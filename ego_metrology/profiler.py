@@ -2,6 +2,7 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from typing import Literal
+from .version import __version__
 from .heuristics import (
     compute_eta, compute_alpha_s, compute_r_eta,
     compute_geometric_status, compute_c_dyn, compute_log_tau,
@@ -63,7 +64,7 @@ class ProfileResult:
             else f"{self.tau:,} tokens"
         )
         return f"""
-  ╔═══ EGO METROLOGY v0.2.1 ═══════════════════════╗
+  ╔═══ EGO METROLOGY v{__version__} ═══════════════════════╗
   ║  Model        : {self.model}
   ║  Tokens       : {self.prompt_tokens:>8,} / {self.max_context_tokens:,} ({self.saturation_pct}% full)
   ║  Calibration  : {self.calibration_status}

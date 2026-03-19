@@ -1,11 +1,37 @@
+# Python
 __pycache__/
 *.py[cod]
-*.egg-info/
-dist/
-build/
+*.so
+.python-version
+
+# Virtualenvs
 .venv/
 venv/
-.env
+env/
+
+# Test / cache
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 .coverage
+htmlcov/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# OS / editor
 .DS_Store
+.vscode/
+.idea/
+
+# Experimental artifacts
+experiments/artifacts/data/
+experiments/artifacts/runs/
+experiments/artifacts/reports/
+experiments/artifacts/calibration/
+
+# Local temp files
+*.log
+tmp/

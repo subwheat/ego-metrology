@@ -1,0 +1,35 @@
+{
+  "registry_version": "policy-registry.v1",
+  "policies": [
+    {
+      "policy_id": "single_pass",
+      "description": "Single generation pass with no explicit verification.",
+      "execution_mode": "single_pass",
+      "verification_enabled": false,
+      "cascade_enabled": false,
+      "cascade_target": null,
+      "max_passes": 1,
+      "notes": null
+    },
+    {
+      "policy_id": "single_pass_verify",
+      "description": "Initial answer followed by an explicit verification/check pass.",
+      "execution_mode": "verify_pass",
+      "verification_enabled": true,
+      "cascade_enabled": false,
+      "cascade_target": null,
+      "max_passes": 2,
+      "notes": "Used to test whether a cheap verification step improves semantic robustness."
+    },
+    {
+      "policy_id": "cascade_small_to_large",
+      "description": "Start with a cheaper first attempt and escalate to a larger model or stronger policy if needed.",
+      "execution_mode": "cascade",
+      "verification_enabled": false,
+      "cascade_enabled": true,
+      "cascade_target": "large_model",
+      "max_passes": 2,
+      "notes": "Offline description only in T2; execution wiring comes later."
+    }
+  ]
+}

@@ -15,7 +15,6 @@ Couvre tous les critères d'acceptation :
 """
 
 import json
-import os
 
 import pytest
 from pydantic import ValidationError

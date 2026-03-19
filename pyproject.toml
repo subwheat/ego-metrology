@@ -15,7 +15,7 @@ authors = [
 keywords = ["llm", "prompt-engineering", "hallucination", "context-window", "mlops", "rag"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "ruff>=0.4"]
+dev = ["pytest>=8.0", "ruff>=0.4", "fastapi>=0.110", "httpx>=0.27", "uvicorn>=0.29"]
 
 [project.scripts]
 ego-profile = "ego_metrology.__main__:main"

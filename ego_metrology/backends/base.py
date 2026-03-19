@@ -9,7 +9,6 @@ et retourne un BackendResult avec les observables mesurés.
 
 from __future__ import annotations
 
-import time
 from typing import Any, Optional
 
 from pydantic import BaseModel, Field

@@ -1,0 +1,360 @@
+{
+  "meta": {
+    "protocol": "v4.3_haiku_full",
+    "model": "claude-haiku-4-5-20251001",
+    "role": "upper-bound operational baseline",
+    "total_calls": 105
+  },
+  "fits": {
+    "A": {
+      "slope": -0.874864,
+      "intercept": -0.9597
+    },
+    "B": {
+      "slope": -0.0,
+      "intercept": 4.6052
+    },
+    "C": {
+      "slope": 0.0,
+      "intercept": 4.6052
+    }
+  },
+  "results": [
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 1,
+      "noise": 0,
+      "avg_prompt_tokens": 170,
+      "avg_c_dyn": 0.170004,
+      "success_rate": 0.6,
+      "log_tau_obs": 4.0943,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.2,
+        "missed": 0.2,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 2,
+      "noise": 3,
+      "avg_prompt_tokens": 227,
+      "avg_c_dyn": 0.227409,
+      "success_rate": 0.4,
+      "log_tau_obs": 3.6889,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.6,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 3,
+      "noise": 8,
+      "avg_prompt_tokens": 324,
+      "avg_c_dyn": 0.324221,
+      "success_rate": 0.6,
+      "log_tau_obs": 4.0943,
+      "log_tau_pred": 0.9997,
+      "errors": {
+        "wrong_condition": 0.2,
+        "missed": 0.2,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 4,
+      "noise": 18,
+      "avg_prompt_tokens": 522,
+      "avg_c_dyn": 0.52227,
+      "success_rate": 0.0,
+      "log_tau_obs": -9.2004,
+      "log_tau_pred": 0.9995,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 1.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 5,
+      "noise": 40,
+      "avg_prompt_tokens": 958,
+      "avg_c_dyn": 0.958718,
+      "success_rate": 0.0,
+      "log_tau_obs": -9.2004,
+      "log_tau_pred": 0.999,
+      "errors": {
+        "wrong_condition": 0.4,
+        "missed": 0.6,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 6,
+      "noise": 80,
+      "avg_prompt_tokens": 1734,
+      "avg_c_dyn": 1.735801,
+      "success_rate": 0.0,
+      "log_tau_obs": -9.2004,
+      "log_tau_pred": 0.9983,
+      "errors": {
+        "wrong_condition": 0.8,
+        "missed": 0.2,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 7,
+      "noise": 140,
+      "avg_prompt_tokens": 2926,
+      "avg_c_dyn": 2.931379,
+      "success_rate": 0.2,
+      "log_tau_obs": 2.9957,
+      "log_tau_pred": 0.9971,
+      "errors": {
+        "wrong_condition": 0.8,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 1,
+      "noise": 0,
+      "avg_prompt_tokens": 138,
+      "avg_c_dyn": 0.138003,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9999,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 2,
+      "noise": 3,
+      "avg_prompt_tokens": 209,
+      "avg_c_dyn": 0.208807,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 3,
+      "noise": 8,
+      "avg_prompt_tokens": 263,
+      "avg_c_dyn": 0.263213,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9997,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 4,
+      "noise": 18,
+      "avg_prompt_tokens": 400,
+      "avg_c_dyn": 0.400437,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9996,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 5,
+      "noise": 40,
+      "avg_prompt_tokens": 875,
+      "avg_c_dyn": 0.875476,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9991,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 6,
+      "noise": 80,
+      "avg_prompt_tokens": 1589,
+      "avg_c_dyn": 1.590378,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9984,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 7,
+      "noise": 140,
+      "avg_prompt_tokens": 2503,
+      "avg_c_dyn": 2.506938,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9975,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 1,
+      "noise": 0,
+      "avg_prompt_tokens": 246,
+      "avg_c_dyn": 0.246011,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 2,
+      "noise": 3,
+      "avg_prompt_tokens": 419,
+      "avg_c_dyn": 0.418641,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9996,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 3,
+      "noise": 8,
+      "avg_prompt_tokens": 441,
+      "avg_c_dyn": 0.441446,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9996,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 4,
+      "noise": 18,
+      "avg_prompt_tokens": 673,
+      "avg_c_dyn": 0.673132,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9993,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 5,
+      "noise": 40,
+      "avg_prompt_tokens": 1096,
+      "avg_c_dyn": 1.096045,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9989,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 6,
+      "noise": 80,
+      "avg_prompt_tokens": 1886,
+      "avg_c_dyn": 1.887728,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9981,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 7,
+      "noise": 140,
+      "avg_prompt_tokens": 3036,
+      "avg_c_dyn": 3.041686,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.997,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    }
+  ]
+}

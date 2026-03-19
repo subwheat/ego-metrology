@@ -1,0 +1,366 @@
+{
+  "meta": {
+    "protocol": "v4.3_qwen_full",
+    "model": "Qwen/Qwen2.5-14B-Instruct",
+    "role": "intermediate instruct model",
+    "total_calls": 210
+  },
+  "fits": {
+    "A": {
+      "slope": -5.479656,
+      "intercept": 5.905,
+      "a_secteur_candidate": 5.905,
+      "beta_secteur_candidate": 5.479656
+    },
+    "B": {
+      "slope": -0.055797,
+      "intercept": 4.5289,
+      "a_secteur_candidate": 4.5289,
+      "beta_secteur_candidate": 0.055797
+    },
+    "C": {
+      "slope": 0.00796,
+      "intercept": 4.5658,
+      "a_secteur_candidate": 4.5658,
+      "beta_secteur_candidate": -0.00796
+    }
+  },
+  "results": [
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 1,
+      "noise": 0,
+      "avg_prompt_tokens": 170,
+      "avg_c_dyn": 0.17018,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 2,
+      "noise": 3,
+      "avg_prompt_tokens": 231,
+      "avg_c_dyn": 0.231287,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 3,
+      "noise": 8,
+      "avg_prompt_tokens": 327,
+      "avg_c_dyn": 0.328125,
+      "success_rate": 0.7,
+      "log_tau_obs": 4.2485,
+      "log_tau_pred": 0.9997,
+      "errors": {
+        "wrong_condition": 0.3,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 4,
+      "noise": 18,
+      "avg_prompt_tokens": 529,
+      "avg_c_dyn": 0.532478,
+      "success_rate": 0.6,
+      "log_tau_obs": 4.0943,
+      "log_tau_pred": 0.9995,
+      "errors": {
+        "wrong_condition": 0.2,
+        "missed": 0.2,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 5,
+      "noise": 40,
+      "avg_prompt_tokens": 952,
+      "avg_c_dyn": 0.965648,
+      "success_rate": 0.2,
+      "log_tau_obs": 2.9957,
+      "log_tau_pred": 0.999,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.8,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 6,
+      "noise": 80,
+      "avg_prompt_tokens": 1743,
+      "avg_c_dyn": 1.803928,
+      "success_rate": 0.0,
+      "log_tau_obs": -9.2004,
+      "log_tau_pred": 0.9982,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 1.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "A",
+      "rule": "count+bind",
+      "level": 7,
+      "noise": 140,
+      "avg_prompt_tokens": 2919,
+      "avg_c_dyn": 3.138925,
+      "success_rate": 0.0,
+      "log_tau_obs": -9.2004,
+      "log_tau_pred": 0.9969,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 1.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 1,
+      "noise": 0,
+      "avg_prompt_tokens": 138,
+      "avg_c_dyn": 0.138107,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9999,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 2,
+      "noise": 3,
+      "avg_prompt_tokens": 220,
+      "avg_c_dyn": 0.220247,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 3,
+      "noise": 8,
+      "avg_prompt_tokens": 281,
+      "avg_c_dyn": 0.281536,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9997,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 4,
+      "noise": 18,
+      "avg_prompt_tokens": 400,
+      "avg_c_dyn": 0.401393,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9996,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.1,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 5,
+      "noise": 40,
+      "avg_prompt_tokens": 768,
+      "avg_c_dyn": 0.776252,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9992,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 6,
+      "noise": 80,
+      "avg_prompt_tokens": 1781,
+      "avg_c_dyn": 1.85041,
+      "success_rate": 0.7,
+      "log_tau_obs": 4.2485,
+      "log_tau_pred": 0.9981,
+      "errors": {
+        "wrong_condition": 0.3,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "B",
+      "rule": "color+section->protocol",
+      "level": 7,
+      "noise": 140,
+      "avg_prompt_tokens": 2446,
+      "avg_c_dyn": 2.594343,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9974,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 1,
+      "noise": 0,
+      "avg_prompt_tokens": 246,
+      "avg_c_dyn": 0.246453,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9998,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 2,
+      "noise": 3,
+      "avg_prompt_tokens": 388,
+      "avg_c_dyn": 0.389148,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9996,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 3,
+      "noise": 8,
+      "avg_prompt_tokens": 464,
+      "avg_c_dyn": 0.466744,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9995,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 4,
+      "noise": 18,
+      "avg_prompt_tokens": 670,
+      "avg_c_dyn": 0.675363,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9993,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 5,
+      "noise": 40,
+      "avg_prompt_tokens": 1066,
+      "avg_c_dyn": 1.083715,
+      "success_rate": 0.9,
+      "log_tau_obs": 4.4998,
+      "log_tau_pred": 0.9989,
+      "errors": {
+        "wrong_condition": 0.1,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 6,
+      "noise": 80,
+      "avg_prompt_tokens": 1866,
+      "avg_c_dyn": 1.938233,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9981,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    },
+    {
+      "family": "C",
+      "rule": "date+role->auth",
+      "level": 7,
+      "noise": 140,
+      "avg_prompt_tokens": 3078,
+      "avg_c_dyn": 3.328341,
+      "success_rate": 1.0,
+      "log_tau_obs": 4.6052,
+      "log_tau_pred": 0.9967,
+      "errors": {
+        "wrong_condition": 0.0,
+        "missed": 0.0,
+        "ambiguous": 0.0
+      }
+    }
+  ]
+}

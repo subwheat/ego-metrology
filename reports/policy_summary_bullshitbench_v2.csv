@@ -1,0 +1,2 @@
+benchmark_id,policy_id,num_runs,num_quality_passed,quality_pass_rate,mean_quality_score,mean_cost_dyn,median_cost_dyn,mean_routing_regret,median_routing_regret,oracle_match_rate
+bullshitbench_v2,single_pass,4,2,0.5,1.25,168.25,168.25,0.0,0.0,1.0

@@ -4,7 +4,7 @@ from ego_metrology import __version__
 import server
 
 def test_package_version_is_021():
-    assert __version__ == "0.2.1"
+    assert __version__ == "0.3.0"
 
 def test_server_uses_package_version():
     assert server.app.version == __version__

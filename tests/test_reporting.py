@@ -109,7 +109,7 @@ class TestBuildPolicySummary:
         runs = [
             make_run(policy_id="single_pass", passed_quality=True, task_id="t1"),
             make_run(policy_id="single_pass", passed_quality=True, task_id="t2"),
-            make_run(policy_id="single_pass", passed_quality=False, task_id="t3"),
+            make_run(policy_id="single_pass", passed_quality=False, quality_score=1.0, task_id="t3"),
         ]
         summaries = build_policy_summary_records(runs)
         sp = next(s for s in summaries if s.policy_id == "single_pass")

@@ -4,15 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ego-metrology"
-version = "0.2.1"
-description = "Heuristic Context Saturation Profiler for LLMs — EGO V12.2 Framework"
+version = "0.3.0"
+description = "Policy Metrology Core for LLMs — cost_dyn, oracle C*, routing regret"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
+dependencies = [
+    "pydantic>=2.0",
+]
 authors = [
     { name = "Julien Tournier", email = "julien@uyuni.world" }
 ]
-keywords = ["llm", "prompt-engineering", "hallucination", "context-window", "mlops", "rag"]
+keywords = ["llm", "policy-metrology", "cost-optimization", "routing-regret", "benchmark", "mlops"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "ruff>=0.4", "fastapi>=0.110", "httpx>=0.27", "uvicorn>=0.29"]
@@ -30,3 +33,6 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py39"
+
+[tool.setuptools.package-data]
+ego_metrology = ["policy_registry.json"]

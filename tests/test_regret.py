@@ -16,6 +16,7 @@ Couvre tous les critères d'acceptation :
 10. build_regret_records associe bien par task_id
 """
 
+from typing import Optional
 import pytest
 
 from ego_metrology.logging_schema import RunRecord, SCHEMA_VERSION
@@ -42,9 +43,9 @@ def make_run(
     task_id: str = "bullshitbench_v2_software_0001",
     benchmark_id: str = "bullshitbench_v2",
     policy_id: str = "single_pass",
-    cost_dyn: float | None = 200.0,
-    passed_quality: bool | None = True,
-    quality_score: float | None = 2.0,
+    cost_dyn: Optional[float] = 200.0,
+    passed_quality: Optional[bool] = True,
+    quality_score: Optional[float] = 2.0,
 ) -> RunRecord:
     global _counter
     _counter += 1
@@ -70,8 +71,8 @@ def make_run(
 def make_oracle(
     task_id: str = "bullshitbench_v2_software_0001",
     benchmark_id: str = "bullshitbench_v2",
-    oracle_policy_id: str | None = "single_pass",
-    cost_star: float | None = 100.0,
+    oracle_policy_id: Optional[str] = "single_pass",
+    cost_star: Optional[float] = 100.0,
     selection_status: str = "ok",
 ) -> OracleRecord:
     return OracleRecord(

@@ -16,6 +16,7 @@ Couvre tous les critères d'acceptation :
 10. write_policy_summary_csv écrit un CSV valide
 """
 
+from typing import Optional
 import csv
 
 import pytest
@@ -42,9 +43,9 @@ def make_run(
     policy_id: str = "single_pass",
     benchmark_id: str = "bullshitbench_v2",
     task_id: str = "task_001",
-    passed_quality: bool | None = True,
-    quality_score: float | None = 2.0,
-    cost_dyn: float | None = 200.0,
+    passed_quality: Optional[bool] = True,
+    quality_score: Optional[float] = 2.0,
+    cost_dyn: Optional[float] = 200.0,
 ) -> RunRecord:
     global _counter
     _counter += 1
@@ -71,8 +72,8 @@ def make_regret(
     chosen_policy_id: str = "single_pass",
     benchmark_id: str = "bullshitbench_v2",
     task_id: str = "task_001",
-    routing_regret: float | None = 50.0,
-    oracle_policy_id: str | None = "single_pass",
+    routing_regret: Optional[float] = 50.0,
+    oracle_policy_id: Optional[str] = "single_pass",
     regret_status: str = "ok",
 ) -> RegretRecord:
     return RegretRecord(

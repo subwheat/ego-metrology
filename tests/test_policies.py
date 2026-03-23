@@ -18,6 +18,7 @@ Couvre tous les critères d'acceptation :
 12. list_policy_ids
 """
 
+from typing import Optional
 from pathlib import Path
 
 import pytest
@@ -53,7 +54,7 @@ def make_policy(**kwargs) -> dict:
     return base
 
 
-def make_registry(policies: list[dict] | None = None) -> dict:
+def make_registry(policies: Optional[list[dict]] = None) -> dict:
     """Retourne un dict PolicyRegistry valide avec 1 politique par défaut."""
     return {
         "registry_version": REGISTRY_VERSION,

@@ -16,6 +16,7 @@ Couvre tous les critères d'acceptation :
 10. summarize_oracle_records() calcule couverture et win counts
 """
 
+from typing import Optional
 import pytest
 
 from ego_metrology.logging_schema import RunRecord, SCHEMA_VERSION
@@ -39,9 +40,9 @@ def make_run(
     task_id: str = "bullshitbench_v2_software_0001",
     benchmark_id: str = "bullshitbench_v2",
     policy_id: str = "single_pass",
-    passed_quality: bool | None = True,
-    quality_score: float | None = 2.0,
-    cost_dyn: float | None = 200.0,
+    passed_quality: Optional[bool] = True,
+    quality_score: Optional[float] = 2.0,
+    cost_dyn: Optional[float] = 200.0,
     model_name: str = "qwen2.5-14b",
 ) -> RunRecord:
     global _counter

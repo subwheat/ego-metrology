@@ -26,7 +26,7 @@ from __future__ import annotations
 import json
 import uuid
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -178,7 +178,7 @@ def load_bullshitbench_judgments(path: str | Path) -> list[BenchmarkJudgment]:
 
 
 def map_bullshitbench_score(
-    score: int | float | None,
+    score: Optional[Union[int, float]],
 ) -> tuple[Optional[float], Optional[float], Optional[bool]]:
     """
     Mappe un score BullshitBench brut vers (quality_score, quality_threshold, passed_quality).

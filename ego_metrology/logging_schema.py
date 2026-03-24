@@ -21,6 +21,12 @@ from pydantic import BaseModel, Field, model_validator
 SCHEMA_VERSION = "runrecord.v1"
 
 CalibrationStatus = Literal["experimental", "candidate", "frozen"]
+MetricsSource = Literal[
+    "observed_local",
+    "provider_reported",
+    "derived",
+    "none",
+]
 
 
 # ---------------------------------------------------------------------------
@@ -48,23 +54,40 @@ class RunRecord(BaseModel):
     completion_tokens: Optional[int] = None
     total_tokens: Optional[int] = None
     latency_ms: Optional[float] = None
+    latency_total_ms: Optional[float] = None
     cost_dyn: Optional[float] = None  # calcul réel = Ticket 3
 
-    # --- D. Exécution / provenance ---
+    # --- D. Runtime v2 portable / local ---
+    provider_name: Optional[str] = None
+    metrics_source: Optional[MetricsSource] = None
+
+    prefill_ms: Optional[float] = None
+    decode_ms: Optional[float] = None
+    queue_ms: Optional[float] = None
+
+    peak_vram_gb: Optional[float] = None
+    gpu_power_w: Optional[float] = None
+    gpu_memory_used_mb: Optional[float] = None
+    gpu_utilization_pct: Optional[float] = None
+
+    tools_count: Optional[int] = None
+    loops_count: Optional[int] = None
+
+    # --- E. Exécution / provenance ---
     backend_name: str = Field(..., min_length=1)
     manifest_hash: str = Field(..., min_length=1)
     calibration_status: CalibrationStatus
 
-    # --- E. Reproductibilité ---
+    # --- F. Reproductibilité ---
     seed: Optional[int] = None
     runner_version: str = Field(..., min_length=1)
     schema_version: str = Field(default=SCHEMA_VERSION)
 
-    # --- F. Extension sûre ---
+    # --- G. Extension sûre ---
     meta: dict[str, Any] = Field(default_factory=dict)
 
     # ------------------------------------------------------------------
-    # Validations logiques croisées (R2, R3, schema_version)
+    # Validations logiques croisées (R2, R3, schema_version, compat v1/v2)
     # ------------------------------------------------------------------
 
     @model_validator(mode="after")
@@ -98,6 +121,15 @@ class RunRecord(BaseModel):
                     f"passed_quality incohérent : score={s}, threshold={th} "
                     f"=> attendu {expected}, reçu {pq}"
                 )
+        return self
+
+    @model_validator(mode="after")
+    def _sync_total_latency(self) -> "RunRecord":
+        """Compat v1/v2 — synchronise latency_ms et latency_total_ms."""
+        if self.latency_ms is None and self.latency_total_ms is not None:
+            self.latency_ms = self.latency_total_ms
+        if self.latency_total_ms is None and self.latency_ms is not None:
+            self.latency_total_ms = self.latency_ms
         return self
 
 

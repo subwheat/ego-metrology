@@ -65,14 +65,27 @@ class TestValidRecord:
         assert r.prompt_tokens is None
         assert r.completion_tokens is None
         assert r.total_tokens is None
+        assert r.latency_ms is None
+        assert r.latency_total_ms is None
         assert r.cost_dyn is None
+        assert r.provider_name is None
+        assert r.metrics_source is None
+        assert r.prefill_ms is None
+        assert r.decode_ms is None
+        assert r.queue_ms is None
+        assert r.peak_vram_gb is None
+        assert r.gpu_power_w is None
+        assert r.gpu_memory_used_mb is None
+        assert r.gpu_utilization_pct is None
+        assert r.tools_count is None
+        assert r.loops_count is None
         assert r.seed is None
 
     def test_meta_defaults_to_empty_dict(self):
         r = RunRecord(**VALID_KWARGS)
         assert r.meta == {}
 
-    def test_full_record_with_tokens_and_quality(self):
+    def test_full_record_with_tokens_quality_and_runtime_v2(self):
         r = RunRecord(
             **VALID_KWARGS,
             quality_score=2.5,
@@ -82,10 +95,35 @@ class TestValidRecord:
             completion_tokens=121,
             total_tokens=935,
             latency_ms=1842.6,
+            latency_total_ms=1842.6,
+            provider_name="local_vllm",
+            metrics_source="observed_local",
+            prefill_ms=510.2,
+            decode_ms=1290.4,
+            queue_ms=42.0,
+            peak_vram_gb=14.7,
+            gpu_power_w=247.5,
+            gpu_memory_used_mb=15052.0,
+            gpu_utilization_pct=88.3,
+            tools_count=0,
+            loops_count=1,
             meta={"judge_source": "bullshitbench_import"},
         )
         assert r.passed_quality is True
         assert r.total_tokens == 935
+        assert r.latency_total_ms == pytest.approx(1842.6)
+        assert r.provider_name == "local_vllm"
+        assert r.metrics_source == "observed_local"
+
+    def test_latency_total_sync_from_latency_ms(self):
+        r = RunRecord(**VALID_KWARGS, latency_ms=250.0)
+        assert r.latency_ms == pytest.approx(250.0)
+        assert r.latency_total_ms == pytest.approx(250.0)
+
+    def test_latency_ms_sync_from_latency_total(self):
+        r = RunRecord(**VALID_KWARGS, latency_total_ms=375.5)
+        assert r.latency_total_ms == pytest.approx(375.5)
+        assert r.latency_ms == pytest.approx(375.5)
 
 
 # ---------------------------------------------------------------------------
@@ -263,6 +301,15 @@ class TestMakeRunRecord:
         r = make_run_record(**VALID_KWARGS, quality_score=1.5, quality_threshold=2.0)
         assert r.passed_quality is False
 
+    def test_explicit_passed_quality_not_overwritten(self):
+        r = make_run_record(
+            **VALID_KWARGS,
+            quality_score=3.0,
+            quality_threshold=2.0,
+            passed_quality=True,
+        )
+        assert r.passed_quality is True
+
     def test_explicit_values_not_overridden(self):
         # Si total_tokens est déjà fourni et cohérent, make_run_record ne l'écrase pas
         r = make_run_record(**VALID_KWARGS, prompt_tokens=700, completion_tokens=150, total_tokens=850)
@@ -276,3 +323,24 @@ class TestMakeRunRecord:
     def test_invalid_calibration_status_raises(self):
         with pytest.raises(ValidationError):
             make_run_record(**{**VALID_KWARGS, "calibration_status": "draft"})
+
+    def test_latency_sync_in_make_run_record(self):
+        r = make_run_record(**VALID_KWARGS, latency_total_ms=999.0)
+        assert r.latency_ms == pytest.approx(999.0)
+        assert r.latency_total_ms == pytest.approx(999.0)
+
+
+# ---------------------------------------------------------------------------
+# 8. chargement JSONL multi-lignes
+# ---------------------------------------------------------------------------
+
+class TestLoadMultipleJsonl:
+    def test_reload_multiple_records(self, tmp_path):
+        path = str(tmp_path / "runs.jsonl")
+        r1 = RunRecord(**{**VALID_KWARGS, "run_id": "RUN_A", "task_id": "task_a"})
+        r2 = RunRecord(**{**VALID_KWARGS, "run_id": "RUN_B", "task_id": "task_b"})
+        append_run_record_jsonl(path, r1)
+        append_run_record_jsonl(path, r2)
+
+        records = load_run_records_jsonl(path)
+        assert [r.run_id for r in records] == ["RUN_A", "RUN_B"]

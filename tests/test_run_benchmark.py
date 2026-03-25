@@ -78,7 +78,11 @@ class TestDryRun:
         )
         assert record.prompt_tokens is None
         assert record.completion_tokens is None
+        assert record.total_tokens is None
         assert record.latency_ms is None
+        assert record.latency_total_ms is None
+        assert record.provider_name is None
+        assert record.metrics_source is None
 
     def test_dry_run_cost_dyn_is_null(self):
         record = run_task_with_policy(
@@ -129,6 +133,29 @@ class TestFakeBackend:
             **BASE_KWARGS,
         )
         assert record.latency_ms == pytest.approx(250.0)
+
+    def test_latency_total_filled(self):
+        record = run_task_with_policy(
+            task=first_task(),
+            policy_id="single_pass",
+            registry=get_registry(),
+            backend=FakeBackend(),
+            dry_run=False,
+            **BASE_KWARGS,
+        )
+        assert record.latency_total_ms == pytest.approx(250.0)
+
+    def test_runtime_v2_fields_propagated(self):
+        record = run_task_with_policy(
+            task=first_task(),
+            policy_id="single_pass",
+            registry=get_registry(),
+            backend=FakeBackend(),
+            dry_run=False,
+            **BASE_KWARGS,
+        )
+        assert record.provider_name == "fake"
+        assert record.metrics_source == "derived"
 
     def test_cost_dyn_calculated(self):
         record = run_task_with_policy(

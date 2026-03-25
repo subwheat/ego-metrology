@@ -184,7 +184,25 @@ def run_task_with_policy(
     # 5. Construire RunRecord
     prompt_tokens = backend_result.prompt_tokens if backend_result else None
     completion_tokens = backend_result.completion_tokens if backend_result else None
+    total_tokens = backend_result.total_tokens if backend_result else None
+
     latency_ms = backend_result.latency_ms if backend_result else None
+    latency_total_ms = backend_result.latency_total_ms if backend_result else None
+
+    provider_name = backend_result.provider_name if backend_result else None
+    metrics_source = backend_result.metrics_source if backend_result else None
+
+    prefill_ms = backend_result.prefill_ms if backend_result else None
+    decode_ms = backend_result.decode_ms if backend_result else None
+    queue_ms = backend_result.queue_ms if backend_result else None
+
+    peak_vram_gb = backend_result.peak_vram_gb if backend_result else None
+    gpu_power_w = backend_result.gpu_power_w if backend_result else None
+    gpu_memory_used_mb = backend_result.gpu_memory_used_mb if backend_result else None
+    gpu_utilization_pct = backend_result.gpu_utilization_pct if backend_result else None
+
+    tools_count = backend_result.tools_count if backend_result else None
+    loops_count = backend_result.loops_count if backend_result else None
 
     record = make_run_record(
         run_id=_make_run_id(),
@@ -200,7 +218,20 @@ def run_task_with_policy(
         seed=seed,
         prompt_tokens=prompt_tokens,
         completion_tokens=completion_tokens,
+        total_tokens=total_tokens,
         latency_ms=latency_ms,
+        latency_total_ms=latency_total_ms,
+        provider_name=provider_name,
+        metrics_source=metrics_source,
+        prefill_ms=prefill_ms,
+        decode_ms=decode_ms,
+        queue_ms=queue_ms,
+        peak_vram_gb=peak_vram_gb,
+        gpu_power_w=gpu_power_w,
+        gpu_memory_used_mb=gpu_memory_used_mb,
+        gpu_utilization_pct=gpu_utilization_pct,
+        tools_count=tools_count,
+        loops_count=loops_count,
         meta=meta,
     )
 

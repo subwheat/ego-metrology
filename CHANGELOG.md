@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- `ego_metrology/backends/anthropic_api.py` now verifies SSL certificates by default.
+- Added an explicit `verify_ssl=False` opt-in for development-only insecure connections.
+
+### Test coverage
+- Added targeted tests for Anthropic SSL context handling.
+
+---
+
 ## v0.3.0 — 2026-03-20
 
 ### Added — Policy Metrology Core

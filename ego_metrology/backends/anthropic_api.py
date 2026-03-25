@@ -19,6 +19,10 @@ from ego_metrology.backends.base import BackendResult, GenerationBackend
 class AnthropicBackend(GenerationBackend):
     """
     Backend pour l'API Anthropic (/v1/messages).
+
+    Par défaut, la vérification SSL est activée.
+    Un mode permissif est disponible uniquement via verify_ssl=False,
+    pour du debug explicite en environnement de développement.
     """
 
     def __init__(
@@ -29,6 +33,7 @@ class AnthropicBackend(GenerationBackend):
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
         timeout: int = 120,
+        verify_ssl: bool = True,
     ) -> None:
         self._model_name = model_name
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY", "")
@@ -36,6 +41,7 @@ class AnthropicBackend(GenerationBackend):
         self.temperature = temperature
         self.system_prompt = system_prompt
         self.timeout = timeout
+        self.verify_ssl = verify_ssl
 
     def generate(
         self,
@@ -69,8 +75,10 @@ class AnthropicBackend(GenerationBackend):
 
         t0 = time.perf_counter()
         ctx = ssl.create_default_context()
-        ctx.check_hostname = False
-        ctx.verify_mode = ssl.CERT_NONE
+        if not self.verify_ssl:
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+
         with urlopen(req, timeout=self.timeout, context=ctx) as resp:
             raw = resp.read()
         latency_ms = (time.perf_counter() - t0) * 1000
@@ -90,5 +98,6 @@ class AnthropicBackend(GenerationBackend):
                 "policy_id": policy_id,
                 "stop_reason": data.get("stop_reason"),
                 "anthropic_id": data.get("id"),
+                "verify_ssl": self.verify_ssl,
             },
         )
